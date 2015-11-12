@@ -10,7 +10,7 @@ The flag is on this site.
 
 The hint says it all. The flag was on the site, and as the question says, **a team** is hiding the flag. It went easy for me, because I solved it before they added Cloudflare DDoS protection. I was using BurpSuite, and since it logs every requests & responses, I searched for team profiles using a pattern like;
 `href=\"\/team\?.*?\"`.
-There I found `EasyCTF Team`'s profile commented as shown;
+There, I found `EasyCTF Team`'s profile commented, as shown;
 <img src='http://i.imgur.com/sim79D1.png?1' />
 I, then, requested `/team?EasyCTF`, and again searched for flag patterns like;
 `easyctf\{.*?\}`.
