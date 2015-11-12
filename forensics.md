@@ -24,8 +24,28 @@ I may or may not have illegally bought this [file](https://www.easyctf.com/stati
 **Hint**:
 I feel like something is missing . . .
 
+This seems hard at first, but with thorough investigation, it may be solved easily. We're provided with a file that is actually a `Zip archive`. During investigation, I found that it's a [**AppleDouble Format**](https://en.wikipedia.org/wiki/AppleSingle_and_AppleDouble_formats), and there's no actual use of second file `._secret.png`. Then, I started working with first file, `secret.png`. I ran `file` to determine what exactly the file is. It showed me `data` only, whereas `png` files normally return 
+`PNG image data, ......`. I wondered what might it be, opened it via `ghex`, and searched compared its offset bits from [Wikipedia's](https://en.wikipedia.org/wiki/List_of_file_signatures). There, it turns out to be a `png` file, but it was missing some offset bits (as the hint says). I repaired the image, inserting those missing bits, and opened the image, and done.
 
+```
+$file secret
+secret: Zip archive data, at least v2.0 to extract
+$unzip secret -d dir
+Archive:  secret
+  inflating: secret_dir/secret.png   
+   creating: secret_dir/__MACOSX/
+  inflating: secret_dir/__MACOSX/._secret.png 
+$cd dir
+$file secret.png 
+secret.png: data
+$file __MACOSX/._secret.png 
+__MACOSX/._secret.png: AppleDouble encoded Macintosh file
+$hd secret.png | head -n1
+00000000  0d 0a 1a 0a 00 00 00 0d  49 48 44 52 00 00 0a 47  |........IHDR...G|
+```
+According to [Wikipedia](https://en.wikipedia.org/wiki/List_of_file_signatures), `89 50 4E 47 0D 0A 1A 0A` is the offset for `png` images.
 
+Flag: `easyctf{troll3d}`
 
 
 A Picture is Worth a Thousand Words - 100 points
