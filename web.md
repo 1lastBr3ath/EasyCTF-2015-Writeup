@@ -1,6 +1,62 @@
 Web
 -----
 
+Easter - 100 points
+------
+[page](https://www.easyctf.com/static/problems/easter/easter.html)
+
+**Hint**:
+Just look around.
+
+It was hard, until I figured out that `console` can be used to deobfuscate JavaScript codes. The page contains nothing, except a picture. I viewed it's source code, and found some obfuscated JavaScript codes. I also tried deobfuscating them, but nothing helped. A friend in IRC told me that we could use `console` to do so. I copied the obfuscated JavaScript code, and printed it under `console`, which give me the deobfuscated JavaScript code, as shown;
+<img src='http://i.imgur.com/C9WUd4D.png?1' />
+The JavaScript code was adding an event listener, which when fired up would print the binary number;<br/>
+`01111011011011010110100101110011011100110110100101101111011011100111001101110101011000110110001101100101011100110111001101111101`<br/>
+Now, I only needed to convert it to ASCII.
+
+Flag: `easyctf{missionsuccess}`
+
+---------------
+
+Personal Home Page - 225 points 
+-----------------
+[I hate PHP.](http://web.easyctf.com:10200/)
+
+**Hint**:
+You might not have permission to read the file, but someone else does ;)
+
+The site cleary tells us that "**Instead of serving pages normally, all the pages are fetched with PHP before written to the screen!**", and that the flags are hidden under `/supersecretflag.txt`. A quick glance makes it all clear. The URLs are like;<br/>
+`http://web.easyctf.com:10200/?page=pages/index.html`,<br/>
+and, since pages are fetched before written to the screen, with PHP, it might be vulnerable to Local File Inclusion (LFI). I passed the parameter as `?page=supersecretflag.txt`, and it threw me the contents of `supersecretflag.txt`.
+
+Flag: `easyctf{file_get_contents_is_9_safe} `
+
+---------------------
+
+Super Secure Lemons - 225 points 
+------------
+This [site](https://web.easyctf.com:10202/) uses an encryption technology to keep its lemons super secure! On second thought, it might not be as secure as we thought.
+
+**Hint**:
+Why is your browser giving you that funny security message?
+
+The site, upon visiting, gave me a security warning. And, as the question relates to encryption technology, I immediately thought of viewing its certificate. And, there it was, quite easy ;)
+
+Flag: `easyctf{never_trust_se1f_signd_certificates}`
+
+----------------------
+
+Wastebin 2 - 250 points
+----------
+So after the previous fiasco, I decided to generate a random `admin` password, and hide it in a file that no one will ever find. And don't try Googling it either, cuz Google can't find it either! Hahaha >:) [Link](http://web.easyctf.com:10207/2/index.php)
+
+**Hint**:
+Where can you find out what files are in a server?
+
+Flag: `easyctf{looks_like_my_robot_proof_protection_isn't_very_human_proof}`
+
+----------------------
+
 Pretty Horrible Programming - 275 points
 ------------------
 [I still hate PHP.](http://web.easyctf.com:10201/)
@@ -33,7 +89,7 @@ Hey I just learned this thing called MySQL! My admin account should be safe now!
 What is [SQL](http://www.w3schools.com/sql/)
 
 Upon reading the question given, I had no doubt that the site was vulnerable to SQL Injection. I opened the link, and checked for SQL Injection, entering;<br/>
-`admin' -- `<br/>
+`admin' or 'x'='x -- `<br/>
 as `username`, and it revealed the flag it was hiding.
 
 Flag: `easyctf{54771309-67e5-4704-8743-6981a40b}`
