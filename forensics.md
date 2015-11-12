@@ -116,7 +116,7 @@ Flag: `easyctf{pcap_fun!??}`
 ----------------------------
 We only have 49 shades of gray D:
 
-#000000 to #F5F5F5... there's one shade missing! Find the hex value of the missing shade. Pound sign optional.
+\#000000 to \#F5F5F5... there's one shade missing! Find the hex value of the missing shade. Pound sign optional.
 
 [Image](https://www.easyctf.com/static/problems/49-shades/shades.png)
 
@@ -156,3 +156,9 @@ Found some interesting words of advice left by sayonara-bye... help me understan
 **Hint**:
 Why does that right channel sound strange?
 
+As we all might had done, I also listened the audio first, but it didn't help. The hint wasn't useful either. It was very hard, at least, for me. First, I needed to learn to use audio editing tools, I picked `audacity`. Again, I needed to learn to analyze 'Spectrogram', and so on. And, even when I found the flag, it was very hard to read. In fact, I couldn't read it. A friend helped me read it actually ;)
+To solve this problem, I opened it up using `audacity`. There, on the left, there's a dropdown menu, from where I selected 'Spectrogram'. The visual pattern produced on the right looks like;<br/>
+<img src='http://i.imgur.com/aVyt4Xu.png'>
+From where, we needed to extract the flag.
+
+The flag was: `easyctf{do_a_frustration}`
