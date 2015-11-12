@@ -37,7 +37,7 @@ Since we only have a picture, I first tried reading the file using `strings`.
 
 `$strings tulip.png`
 
-There was nothing. I then tried finding if it was hiding something by comparing file signature, using gHex, still got nothing. However, at last, I realized that the problem says it all. It's a 'Forensics' problem. That's it, I only needed a forensics tool, I found one at http://29a.ch/photo-forensics/#forensic-magnifier.
+There was nothing. I then tried finding if it was hiding something by comparing file signature, using `gHex`, still got nothing. However, at last, I realized that the problem says it all. It's a '**Forensics**' problem. That's it, I only needed a forensics tool, I found one at http://29a.ch/photo-forensics/#forensic-magnifier.
 
 There, I only needed to load the image.
 
