@@ -58,7 +58,6 @@ Try to look up useful Linux commands.
 
 The question only gives us the clue that the file is owned by `l33t_haxx0r`. Which, still, is enought to find a file. Linux provides us with a very useful command line utility that can find files based on different attributes, `find`. I only fired up the command, and found the file.
 ```
-$cd /
 $find / -user l33t_haxx0r 2> /dev/null 
 /var/www/html/index.html
 ```
