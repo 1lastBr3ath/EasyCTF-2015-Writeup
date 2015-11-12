@@ -44,32 +44,50 @@ If you read the question carefully, it says '*They put a flag inside `/problems/
 $strings sfs|grep easyctf
 easyctf{w0aw_stor1ng_fl4gs_in_pla1nt3xt_i5_s0oper_s3cure}
 ```
-And, there it was :)
+And, there it was :)<br/>
 Flag: `easyctf{w0aw_stor1ng_fl4gs_in_pla1nt3xt_i5_s0oper_s3cure}`
 
 --------------------
 
+Hijacked! - 100 points
+-----------
+Someone planted a file on our computer (the [shell server](//easyctf.com/shell)), but we don't know what it is! The only clue that we have is that it's owned by a user called `l33t_haxx0r`. Can you figure out the flag?
 
+**Hint**:
+Try to look up useful Linux commands.
 
-A Picture is Worth a Thousand Words - 100 points
---------------
-
-A picture is worth a thousand words. Can you find the (JPEG) picture among a thousand files? Connect to the EasyCTF SSH server and find the files in `/problems/1000words`. The files are also available for download [here](https://www.easyctf.com/static/problems/1000words/data.zip).
-
-**Hint**:<br/>
-Grep is always your friend.
-
-Here, we were provided 1000+ files, each with random name, and with no file extension. We could also download the file from given link. I tried solving it by connecting to the SSH. It was easier to find the JPEG image, just tried;
-
+The question only gives us the clue that the file is owned by `l33t_haxx0r`. Which, still, is enought to find a file. Linux provides us with a very useful command line utility that can find files based on different attributes, `find`. I only fired up the command, and found the file.
 ```
-$file * | grep JPEG
-UgeVjTlmZjNFvULk: JPEG image data, JFIF standard 1.01, aspect ratio, density 1x1, segment length 16, baseline, precision 8, 266x71, frames 3
+$cd /
+$find / -user l33t_haxx0r 2> /dev/null 
+/var/www/html/index.html
+```
+I tried to find the flag using `grep` like;
+```
+$grep 'easyctf' /var/www/html/index.html
+```
+But it didn't return any matches. I, then, opened the file using `vim`, and scrolled through the pages. There, I found the flag. `grep` didn't return any matches, because it wasn't in a single line.
+
+Flag: `easyctf{c0mp1et3ly_r3kt}`
+
+---------------------------
+
+Same Difference - 125 points
+-------------------
+We've noticed that a list of passwords has been modified. Compare the original `master_copy.txt` to the `suspicious.txt` and tell us what the password was changed to! The files are on the shell server at `/problems/same_difference`.
+
+This can be solved only with the tools available in the shell. No scripting languages are required.
+
+**Hint**:
+There's a pretty cool Linux command called `diff` that might be useful for you.
+
+This, as has been said in *hint*, can easily be solved using `diff`. The command I used is;
+```
+$diff --suppress-common-lines master_copy.txt suspicious.txt 
+8834c8834
+< easyctf{17c85a939e5ee1b0b0e00ed7187d11f7}
+---
+> easyctf{60a57b3974029aa012e66b05f122748b}
 ```
 
-I found the image, however there were no flags in it. I tried reading its content using `cat` and `strings`, and they were of no help. Finally, I decided to download the file given in question, and opened the image. And, there it was.
-
-Flag: `easyctf{it_must_be_pretty_hard_reading_this}`
-
--------------
-find / -user l33t_haxx0r 2> /dev/null
-
+Flag: `easyctf{60a57b3974029aa012e66b05f122748b}`
