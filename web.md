@@ -1,12 +1,36 @@
 Web
 -----
 
+Pretty Horrible Programming - 275 points
+------------------
+[I still hate PHP.](http://web.easyctf.com:10201/)
+
+**Hint**:
+How is the webpage checking your password?
+
+The given site contains only a text field (`type='password'`), which takes password as input and sends `GET` request to itself. I viewed its source code (View Source), and found that its `php` source code is located at `index.source.php`. I viewed its `php` source code, and found that it was comparing passwords using `strcmp`, like;
+```
+$auth = false;
+            if (isset($_GET["password"])) {
+                if (strcmp($_GET["password"], $pass) == 0) {
+                    $auth = true;
+                }
+            }
+```
+A quick Google Search gave me the idea that supplying an array, instead of a single parameter, results in comparision being `true`. 
+The final request was;<br/>
+`http://web.easyctf.com:10201/index.php?password[]=x`
+
+Flag: `easyctf{never_trust_strcmp}`
+
+--------------------
+
 Wastebin 3 - 325 points
 -----------------------
 Hey I just learned this thing called MySQL! My admin account should be safe now! [Link](http://web.easyctf.com:10207/3/)
 
 **Hint**:
-What is [SQL](http://www.w3schools.com/sql/?
+What is [SQL](http://www.w3schools.com/sql/)
 
 Upon reading the question given, I had no doubt that the site was vulnerable to SQL Injection. I opened the link, and checked for SQL Injection, entering;<br/>
 `admin' -- `<br/>
