@@ -1,6 +1,65 @@
 Web
 -----
 
+Plot Twist - 20 points 
+----------
+We need to get the flag at [this](https://www.easyctf.com/static/problems/plot-twist/index.html) site. That shouldn't be too hard.
+
+**Hint**:
+There must be a backup on that site SOMEWHERE . . . you just have to look harder
+
+This also presents nothing, but a static HTML page. I viewed its source code, and found nothing, because I didn't go through scripts. But when I checked **Scripts** using developer tools, I found the flag, it was printing it in the `console`.
+
+Flag: `easyctf{remember_to_check_everywhere}`
+
+----------
+
+Teach Me How to Write Like This - 30 points 
+---------
+My friend Michelle found this cool new site, but you have to pay to read and she doesn't have money. Can you help her read the [fics](https://www.easyctf.com/static/problems/fandoms/index.html) anyways?
+
+**Hint**:
+Where can you find out what files are in a server?
+
+It only required to view source code. If you really want to read the contents, you could delete `class='pay'` and `class='blur'`.
+
+Flag: `easyctf{geico_geck0s}`
+
+-------------------
+
+2147483648% Secure - 35 points 
+-----------
+Hack my friend's [website](https://www.easyctf.com/static/problems/intro-js/index.html)! From what she tells me, it's super secure. Why don't we prove her wrong :)
+
+**Hint**:
+Don't try to figure out what the messy JavaScript code means. [Developer tools](https://www.google.com/search?q=developer+tools) help a lot in things like this.
+
+The page, here, says 'A flag is hidden somewhere on this page; try to figure out what it is!'. I viewed the source code, and found the flag was written like;
+```
+var _0xa107=["\x64\x65\x76\x65\x6C\x6F\x70\x65\x72\x5F\x63\x6F\x6E\x73\x6F\x6C\x65\x5F\x69\x73\x5F\x79\x6F\x75\x72\x5F\x66\x72\x69\x65\x6E\x64","\x65\x61\x73\x79\x63\x74\x66\x7B","\x7D"];
+			var _0x6fdc=[_0xa107[0],_0xa107[1],_0xa107[2]];
+			var secret=_0x6fdc[0];
+			secret=_0x6fdc[1]+secret+_0x6fdc[2];
+```
+Though I deobfuscated it to figure out the flag, we don't need to. As the `flag` says, developer `console` is our friend. Just type in `secret` and hit Enter, it will print the flag :) (`secret` is a variable name)
+
+Flag: `easyctf{developer_console_is_your_friend}`
+
+--------------------
+
+Wastebin 1 - 90 points
+---------
+I created a paste-sharing site the other day. Since client-side is faster, I decided to retrieve the entire database and store it client-side. No one should be able to see it, right? Prove me wrong by finding the admin password. [page](https://www.easyctf.com/static/problems/wastebin-1/index.html)
+
+**Hint**:
+What's wrong with storing things on the client's browser?
+
+This was amongst the easient one. The question says it all, the entire database is stored client side. I just viewed the source code, and found everyone's password, but we only needed admin's password ;)
+
+Flag: `easyctf{cr4zy_p4ssw0rds}`
+
+--------------------
+
 Easter - 100 points
 ------
 [page](https://www.easyctf.com/static/problems/easter/easter.html)
