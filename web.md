@@ -1,6 +1,23 @@
 Web
 -----
 
+Wastebin 3 - 325 points
+-----------------------
+Hey I just learned this thing called MySQL! My admin account should be safe now! [Link](http://web.easyctf.com:10207/3/)
+
+**Hint**:
+What is [SQL](http://www.w3schools.com/sql/?
+
+Upon reading the question given, I had no doubt that the site was vulnerable to SQL Injection. I opened the link, and checked for SQL Injection, entering;<br/>
+`admin' -- `<br/>
+as `username`, and it revealed the flag it was hiding.
+
+Flag: `easyctf{54771309-67e5-4704-8743-6981a40b}`
+
+We could also read the `php` source code at `/index.source.php`, which is commented under source code (View Source).
+
+------------------------
+
 Infinity Star - 375 points
 -----------------
 Infinity Star Bank's [new website](http://web.easyctf.com:10206/) is up! In honor of their opening, they are offering a premium service that allows you to view flags.
