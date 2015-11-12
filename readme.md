@@ -7,4 +7,4 @@ This repo contains writeups on [EasyCTF 2015](//easyctf.com) [Problems](//easyct
 ##[Easter Eggs](easter_eggs.md)
 
 
-*#repo forked from [DavidJacobson/EasyCTF-2015-writeup](DavidJacobson/EasyCTF-2015-writeup)*
+**#repo forked from [DavidJacobson/EasyCTF-2015-writeup](DavidJacobson/EasyCTF-2015-writeup)**
