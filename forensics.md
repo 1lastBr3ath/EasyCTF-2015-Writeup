@@ -47,6 +47,22 @@ According to [Wikipedia](https://en.wikipedia.org/wiki/List_of_file_signatures),
 
 Flag: `easyctf{troll3d}`
 
+--------------------------
+
+
+lolteam - 65 points
+-------------------
+There's a suspicious team out there called lolteam, I got my eyes on them for a while and I managed to [wiretap](https://www.easyctf.com/static/problems/lolteam/lolteam.pcapng) their browser as they were changing their password. What did they change their password to?
+
+**Hint**:
+Don't know how to open `.pcapng` files?
+
+Here, we're given a `.pcapng` file, which can be opened using `Wireshark`. Just selecting '**Follow TCP Stream**' from '**Analyze**' menu reveals the form data, which also includes the flag.
+
+Flag: `easyctf{no,_lolteam_is_not_an_admin_account}`
+
+-----------
+
 
 A Picture is Worth a Thousand Words - 100 points
 --------------
@@ -69,6 +85,46 @@ Flag: `easyctf{it_must_be_pretty_hard_reading_this}`
 
 -------------
 
+Rest in Pepperoni-Pizzas - 100 points
+---------------------
+I gave my little sister a flag, but she cut it up and hid the pieces! Retrieve it here: [ripinpizzas.pdf](https://www.easyctf.com/static/problems/rip/ripinpizzas.pdf).
+
+**Hint**:
+Have fun! If you do it by the paper-and-scissors method, share it to [@easyctf](//twitter.com/easyctf)!
+
+
+-------------------------------------
+
+iSpy - 120 points
+----------------
+We intercepted some suspicious network activity. We think that the enemy has been exchanging important data. Can you help us figure out what it is? You can find a copy of the file [here](https://www.easyctf.com/static/problems/ispy/ispy.pcapng)
+
+**Hint**:
+You're going to need to be able to open that file. Something like [Wireshark](https://www.wireshark.org/) might help.
+
+Here, again, we're given a `.pcapng` file. Opening it using `Wireshark`, and selecting 'Follow TCP Stream' reveals the HTTP reqeust being made. Where, in the end, the user is redirected to a page using `meta` tag as;
+```
+<meta http-equiv='refresh' content='0;url=http://postimg.org/gallery/2p8cfi4l2/49324a00/'>
+```
+I opened it up, and it's there; The flag.
+
+Flag: `easyctf{pcap_fun!??}`
+
+----------------------------
+
+49 Shades of Gray - 125 points
+----------------------------
+We only have 49 shades of gray D:
+
+#000000 to #F5F5F5... there's one shade missing! Find the hex value of the missing shade. Pound sign optional.
+
+[Image](https://www.easyctf.com/static/problems/49-shades/shades.png)
+
+**Hint**:
+How can we tell which color is which?
+
+
+-----------------------------------------
 
 Who is this god? - 175 points
 ---------------------------
@@ -88,3 +144,15 @@ There was nothing. I then tried finding if it was hiding something by comparing 
 There, I only needed to load the image.
 
 Flag: `easyctf{all_hail_michy}`
+
+---------------------------------
+
+sayonara - 325 points
+---------------------
+Found some interesting words of advice left by sayonara-bye... help me understand it!
+
+[sayonara.mp3](https://www.easyctf.com/static/problems/sayonara/sayonara.mp3) MD5: 9f44501f0ac360c3255548c96b70aecb
+
+**Hint**:
+Why does that right channel sound strange?
+
