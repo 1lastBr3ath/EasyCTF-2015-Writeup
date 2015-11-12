@@ -25,7 +25,7 @@ I may or may not have illegally bought this [file](https://www.easyctf.com/stati
 I feel like something is missing . . .
 
 This seems hard at first, but with thorough investigation, it may be solved easily. We're provided with a file that is actually a `Zip archive`. During investigation, I found that it's a [**AppleDouble Format**](https://en.wikipedia.org/wiki/AppleSingle_and_AppleDouble_formats), and there's no actual use of second file `._secret.png`. Then, I started working with first file, `secret.png`. I ran `file` to determine what exactly the file is. It showed me `data` only, whereas `png` files normally return 
-`PNG image data, ......`. I wondered what might it be, opened it via `ghex`, and searched compared its offset bits from [Wikipedia's](https://en.wikipedia.org/wiki/List_of_file_signatures). There, it turns out to be a `png` file, but it was missing some offset bits (as the hint says). I repaired the image, inserting those missing bits, and opened the image, and done.
+`PNG image data, ......`. I wondered what it might be, opened it via `ghex`, and compared its offset bits from [Wikipedia's](https://en.wikipedia.org/wiki/List_of_file_signatures). There, it turns out to be a `png` file, but it was missing some offset bits (as the hint says). I repaired the image, inserting those missing bits, opened the image, and done. There's the flag.
 
 ```
 $file secret
