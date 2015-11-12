@@ -4,6 +4,7 @@ This repo contains writeups on [EasyCTF 2015](//easyctf.com) [Problems](//easyct
 ##[Web](web.md)
 ##[Binary Exploitation](binary_exploitation.md)
 ##[Cryptography](crypto.md)
+##[Forensics](forensics.md)
 ##[Easter Eggs](easter_eggs.md)
 
 
