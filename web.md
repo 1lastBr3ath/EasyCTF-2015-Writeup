@@ -35,13 +35,13 @@ Hack my friend's [website](https://www.easyctf.com/static/problems/intro-js/inde
 Don't try to figure out what the messy JavaScript code means. [Developer tools](https://www.google.com/search?q=developer+tools) help a lot in things like this.
 
 The page, here, says 'A flag is hidden somewhere on this page; try to figure out what it is!'. I viewed the source code, and found the flag was written like;
-```
+```js
 var _0xa107=["\x64\x65\x76\x65\x6C\x6F\x70\x65\x72\x5F\x63\x6F\x6E\x73\x6F\x6C\x65\x5F\x69\x73\x5F\x79\x6F\x75\x72\x5F\x66\x72\x69\x65\x6E\x64","\x65\x61\x73\x79\x63\x74\x66\x7B","\x7D"];
 			var _0x6fdc=[_0xa107[0],_0xa107[1],_0xa107[2]];
 			var secret=_0x6fdc[0];
 			secret=_0x6fdc[1]+secret+_0x6fdc[2];
 ```
-Though I deobfuscated it to figure out the flag, we don't need to. As the `flag` says, developer `console` is our friend. Just type in `secret` and hit Enter, it will print the flag :) (`secret` is a variable name)
+Though I deobfuscated it to figure out the flag, we don't need to. As the `flag` says, developer `console` is our friend. Just type in `secret` and hit Enter, it will print the flag :)
 
 Flag: `easyctf{developer_console_is_your_friend}`
 
@@ -124,7 +124,7 @@ Pretty Horrible Programming - 275 points
 How is the webpage checking your password?
 
 The given site contains only a text field (`type='password'`), which takes password as input and sends `GET` request to itself. I viewed its source code (View Source), and found that its `php` source code is located at `index.source.php`. I viewed its `php` source code, and found that it was comparing passwords using `strcmp`, like;
-```
+```php
 $auth = false;
             if (isset($_GET["password"])) {
                 if (strcmp($_GET["password"], $pass) == 0) {
@@ -153,7 +153,10 @@ as `username`, and it revealed the flag it was hiding.
 
 Flag: `easyctf{54771309-67e5-4704-8743-6981a40b}`
 
-We could also read the `php` source code at `/index.source.php`, which is commented under source code (View Source).
+We could also read the `php` source code at `/index.source.php`, which is commented under source code (View Source). The SQL query is dynamically built, concatinating user supplied input without prior validation like;
+```sql
+SELECT * FROM `users` WHERE username='$username' AND password='$password';
+```
 
 ------------------------
 
@@ -181,12 +184,12 @@ There's a team that's breaking the rules and hiding flags on this site! Find the
 **Hint**:
 The flag is on this site.
 
-The hint says it all. The flag was on the site, and as the question says, **a team** is hiding the flag. It went easy for me, because I solved it before they added Cloudflare DDoS protection. I was using BurpSuite, and since it logs every requests & responses, I searched for team profiles using a pattern like;
-`\/team\?.*?`.
+The hint says it all. The flag was on the site, and as the question says, **a team** is hiding the flag. It went easy for me, because I solved it before they added Cloudflare DDoS protection. I was using BurpSuite, and since it logs every requests & responses, I searched for team profiles using a pattern like;<br/>
+`\/team\?.*?`<br/>
 There, I found `EasyCTF Team`'s profile commented, as shown;
 <img src='http://i.imgur.com/sim79D1.png?1' />
-I, then, requested `/team?EasyCTF`, and again searched for flag patterns like;
-`easyctf\{.*?\}`.
+I, then, requested `/team?EasyCTF`, and again searched for flag patterns like;<br/>
+`easyctf\{.*?\}`
 
 Flag: `easyctf{h4xxing_th3_c0mpetition_s1t3}`
 
