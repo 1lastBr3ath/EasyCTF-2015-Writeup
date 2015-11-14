@@ -180,7 +180,7 @@ Read the input from a file called `sorting-job.in` that's in the current working
 **Hint**:
 I wonder if there is a handy sort function for this?
 
-There might be a handy sort function, indee, but since I'm not that familiar with python, I did it my way. Here, we were to take a list of numbers, separated by commas, from `sorting-job.in`, and print it in descending order to `sorting-job.out`.
+There might be a handy sort function, indeed, but since I'm not that familiar with python, I did it my own way. Here, we were to take a list of numbers, separated by commas, from `sorting-job.in`, and print it in descending order to `sorting-job.out`.
 
 Here's the solution I wrote;
 ```python
