@@ -152,7 +152,7 @@ op2 = int(exp[2])
 if op1 in range(1,1000) and op2 in range(1,1000):
     if exp[0] == 'add': result = op1 + op2
     elif exp[0] == 'subtract': result = op1 - op2
-open('math-class.out','w').write(str(abs(result))+"\n")
+open('math-class.out','w').write(str(abs(result))+'\n')
 ```
 
 **Sample Input & Output**:
@@ -200,3 +200,95 @@ Flag: `easyctf{sorting_is_as_easy_as_3_2_1!}`
 
 ---------
 
+EasyCTF Day - 55 points 
+----
+EasyCTF started on November 3rd, 2015 this year. Find the position where the numerical representation of the month and day of this date `1103` is first found within pi. Use any language you'd like! The flag is the position of the first digit of the date within pi, where 3 is the first digit and the decimal point `.` is not considered a position.
+
+**Hint**:
+First you have to find a way to generate some digits of pi.
+
+I solved it differently, using JavaScript. I Googled for *digits of pi*, visited a [site](http://www.geom.uiuc.edu/~huberty/math5337/groupe/digits.html), and extracted the `indexOf` **1103** using `Developer console`.<br/>
+The query I used was;
+```js
+document.body.innerText.match(/3\.14.*?1103/).toString().replace(/\s/g,'').replace('.','').indexOf('1103')+1;
+```
+Flag: `easyctf{3494}`
+I, later, found a [site](http://www.angio.net/pi/digits.html) that does it without any effort.
+
+------------
+
+Looking for Letters - 65 points
+-------------
+Use the programming interface to complete this task.
+
+Input: A string containing alphanumeric characters.
+Output: A string containing only the letters of the input.
+
+Read the input from a file called `looking-for-letters.in` that's in the current working directory, and then write your output to a file called `looking-for-letters.out`.
+
+**Hint**:
+If you need help, try looking at the Python Tutorial in the Learn section!
+
+Here, we take a `string` containing alphanumeric characters from `looking-for-letters.in`, and print `string` containing letters only to `looking-for-letters.out`. For this, I checked if the ordinal value of each character falls under `65 - 90` or `97 - 122`, which covers all, small as well as capital letters.<br/>
+Here's the solution I wrote;
+```python
+chars = open('looking-for-letters.in','r').read()
+tmp = []
+for c in chars:
+  if ord(c) in range(65,90) or ord(c) in range(97,122):
+    tmp.append(c)
+open('looking-for-letters.out', 'w').write(''.join(tmp)+'\n')
+```
+**Sample Input & Outpu**:
+```zsh
+$cat looking-for-letters.in 
+1234qwert1234asdf
+$python looking-for-letters.py
+$cat looking-for-letters.out 
+qwertasdf
+```
+Flag: `easyctf{filtering_the_#s_out}`
+
+-------
+
+String Change - 70 points 
+-------
+Use the programming interface to complete this task. Given an array of 5 numbers, change every nth character, with n being the value of the first number of the array and the first letter of the string as the 1st character, of a string and move its value up by one (a turns into b, z turns into a). Repeat this for the rest of the numbers of the array and return the changed string. Do this for all the strings. Be careful to keep the original capitalization!
+
+For example: `[2,3,7,5,4]` and `oTerNmIWxGqaaV` would become `oUftOoJYyIqdaX`
+
+ID: `string-change`
+Input: Read the input from a file called `string-change.in` that contains a string of: a list of 5 numbers separated by commas followed by a linebreak, and then a string of random characters.
+Output: The string changed according to the values in the list, written to a file called `string-change.out`.
+
+**Hint**:
+First, look into string splitting, and the `ord()` and `chr()` functions!
+
+It took me long enough to solve, because I didn't understand the question clearly. When it says, '**change every nth character**', it means every nth i.e. if `n=2`, every multiples of `2` i.e. `2, 4, 6, 8` and so on. And, if a number repeats, increment it accordingly. In the example, 4th character, `r` was incremented to `t`, because it was, first, incremented as multiples of `2`, and second by `4` in the list. If you understand it clearly, it's quite straightforward.<br/>
+Here's the solution I wrote;
+```python
+ip = open('string-change.in','r').readlines()
+chars = list(ip[1].strip('\n'))
+nums = map(int, ip[0].strip('\n').split(','))
+i = None
+for num in nums:
+  i = num-1
+  while i <= len(chars):
+    if chars[i] == 'z': chars[i] = 'a'
+    elif chars[i] == 'Z': chars[i] = 'A'
+    else: chars[i] = chr(ord(chars[i])+1)
+    i += num
+open('string-change.out','w').write(''.join(chars)+'\n')
+```
+**Sample Input & Output**:
+```zsh
+$cat string-change.in 
+20,2,11,12,19
+ROqcrLmPZKxByDVVbCKojHSaOeQmrX
+$ python string-change.py 
+$ cat string-change.out 
+RPqdrMmQZLyDyEVWbDLqjJScOfQnrY
+```
+Flag: `easyctf{changing_things_up_once_in_a_while_is_gooood_for_you}`
+
+-----------
