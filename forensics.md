@@ -9,7 +9,7 @@ Oh look, it's a perfectly innocent picture of an [apple](https://www.easyctf.com
 Apples are suspicious. Don't trust apples. They always have something to hide . . .
 
 This was amongst the easiest one. I downloaded the image, and read its content using `strings` & piped through `grep`. That did the work.
-```
+```zsh
 $strings apple.jpg | grep easyctf
    the flag is easyctf{w0w_much_appl3s}
 ```
@@ -27,7 +27,7 @@ I feel like something is missing . . .
 This seems hard at first, but with thorough investigation, it may be solved easily. We're provided with a file that is actually a `Zip archive`. During investigation, I found that it's a [**AppleDouble Format**](https://en.wikipedia.org/wiki/AppleSingle_and_AppleDouble_formats), and there's no actual use of second file `._secret.png`. Then, I started working with first file, `secret.png`. I ran `file` to determine what exactly the file is. It showed me `data` only, whereas `png` files normally return 
 `PNG image data, ......`. I wondered what it might be, opened it via `ghex`, and compared its offset bits from [Wikipedia's](https://en.wikipedia.org/wiki/List_of_file_signatures). There, it turns out to be a `png` file, but it was missing some offset bits (as the hint says). I repaired the image, inserting those missing bits, opened the image, and done. There's the flag.
 
-```
+```zsh
 $file secret
 secret: Zip archive data, at least v2.0 to extract
 $unzip secret -d dir
@@ -74,7 +74,7 @@ Grep is always your friend.
 
 Here, we were provided 1000+ files, each with random name, and with no file extension. We could also download the file from given link. I tried solving it by connecting to the SSH. It was easier to find the JPEG image, just tried;
 
-```
+```zsh
 $file * | grep JPEG
 UgeVjTlmZjNFvULk: JPEG image data, JFIF standard 1.01, aspect ratio, density 1x1, segment length 16, baseline, precision 8, 266x71, frames 3
 ```
@@ -103,7 +103,7 @@ We intercepted some suspicious network activity. We think that the enemy has bee
 You're going to need to be able to open that file. Something like [Wireshark](https://www.wireshark.org/) might help.
 
 Here, again, we're given a `.pcapng` file. Opening it using `Wireshark`, and selecting 'Follow TCP Stream' reveals the HTTP reqeust being made. Where, in the end, the user is redirected to a page using `meta` tag as;
-```
+```html
 <meta http-equiv='refresh' content='0;url=http://postimg.org/gallery/2p8cfi4l2/49324a00/'>
 ```
 I opened it up, and it's there; The flag.
