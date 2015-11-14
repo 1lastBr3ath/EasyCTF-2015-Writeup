@@ -144,6 +144,7 @@ There are only 2 different possible operations, addition and subtraction, and al
 Two very useful functions are int() and split(). Read about them in the documentation.
 
 Here, we take a mathematical expression in English form, as in `add 1 2`, separated by spaces, from `math-class.in`. Then, evaluate the expression, and print its absolute value in `math-class.out`.
+
 Here's the solution I wrote;
 ```python
 exp = open('math-class.in', 'r').read().split()
@@ -180,6 +181,7 @@ Read the input from a file called `sorting-job.in` that's in the current working
 I wonder if there is a handy sort function for this?
 
 There might be a handy sort function, indee, but since I'm not that familiar with python, I did it my way. Here, we were to take a list of numbers, separated by commas, from `sorting-job.in`, and print it in descending order to `sorting-job.out`.
+
 Here's the solution I wrote;
 ```python
 nums = open('sorting-job.in','r').read().split(',')
@@ -317,7 +319,7 @@ Read the input from a file called `piglatin1.in` that's in the current working d
 Words are defined as separated by spaces. :)
 
 The solution is also straightforward,<br/>
-\- we add 'yay' to the end if the word begins with vowel, else 
+\- we add 'yay' to the end if the word begins with vowel, else <br/>
 \- we move the first letter to the end, and add 'ay'<br/>
 Here's the solution I wrote;
 ```python
@@ -359,6 +361,7 @@ Read the input from a file called `piglatin2.in` that's in the current working d
 Work backwards! You'll probably need the `chr()` and `ord()` functions! Also, string splicing is pretty cool in Python ;)
 
 It was almost similar to previous one, except in case of capitalization. There, it confused me for a moment.
+
 Here's the solution I wrote;<br/>
 ```python
 words = open('piglatin2.in', 'r').readline().split()
@@ -394,4 +397,56 @@ Note: `easyctf{}` formatting is not required for this problem.
 Note: there may be multiple correct answers. The grader runs the same code that's in the given file.
 
 This, to my knowledge, was/is not working properly. I went through the program thoroughly, and since I didn't get the complete flag, I, in order to view what it has to say given the wrong input, entered the string `canary`. In, other problems, it was giving a hint, kind of, but it accepted it as a flag instead. Tough it says, 'There may be multple correct answers', but according to the program given, a correct answer must of be 25 characters.
+
 Anyway, here's my analysis of the program;<br/>
+```python
+from string import ascii_uppercase as v, ascii_lowercase as k
+# i.e. v = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' & k = 'abcdefghijklmnopqrstuvwxyz'
+def check_flag(s):
+	if len(s) != 0x19:  # i.e. The flag must 25 characters long
+		return False
+	s = list(s)         # s is a list, now
+	if int(`[s.pop(r) for r in ([2] + [i for i in range(11, 18, 2)] + [20])[::-1]][::-1]`[2::5]) != 0x61a83:
+	# i.e. pop items with index [20, 17, 15, 13, 11, 2]] from s
+	# And, since it's in descending order, indexing isn't affected
+	# Therefore, flag = 'xx4xxxxxxxx0x0x0x0xx0xxxx'
+	# s = list('xxxxxxxxxxxxxxxxxxx')
+		return False
+	if len(list(set([s.pop(r) for r in map(lambda p: int(p, 2), [("1"*5)[:2], ("1"*5)[2:]])[::-1]]))) != s.index("h"):
+	# i.e. pop items with index [7, 3] from s
+	# And, since s[2] is already popped, indexing differs
+	# Therefore, flag = 'xx4hxxxxxxx0x0x0x0xx0xxxx'
+	# s = list('xxxxxxxxxxxxxxxxx')
+		return False
+	y, z = [], []
+	u = len(list(set([repr(y.append(s.pop(-1))) + repr(z.append(s.pop(-1))) for w in range(2)]))) - 1
+	# 4 more items are popped from s, from the end
+	# s = list('xxxxxxxxxxxxx')
+	if u != len(list(set(y))) ^ len(list(set(z))):
+		return False
+	if (ord(y[u]) ^ ord(z[u])) ^ 0x1e != 0:
+	# That means the last 2 chars can be either
+	# (p n), (q o), (r l), (s m), (t j), (u k), (v h), (w i), (x f), (y g), (z d) or their uppercases
+		return False
+	if v.index(s.pop()) ^ len(s) ^ 0x1e != 0:
+	# 1 more item popped from s, from the end
+	# Therefore, flag = 'xx4hxxxxxxx0x0x0x0xS0xxxx' because 18^120x1e == 0
+	# s = 'xxxxxxxxxxxx'
+	# len(s) = 12
+		return False
+	a, i = filter(lambda c: c in v, s), filter(lambda c: c in k, s)
+	if map(lambda a: a + 0x50, [7, 2, 4, -8]) + [0x4f] * 4 != map(ord, a):
+	# a = ['W', 'R', 'T', 'H', 'O', 'O', 'O', 'O']
+		return False
+	i[1:3] = i[2:0:-1]
+	if i != list("hate"):
+	# i = ['h', 't', 'a', 'e']
+		return False
+	return True
+```
+From above analysis, what I can say is;<br/>
+\- Flag = 'xx4hxxxxxxx0x0x0x0xS0xxxx'<br/>
+\- The last two chars must be either (p n), (q o), (r l), (s m), (t j), (u k), (v h), (w i), (x f), (y g), (z d)<br/>
+\- While others, except 22nd & 23rd, are filled in from the list ['W', 'R', 'T', 'H', 'O', 'O', 'O', 'O', 'h', 't', 'a', 'e']
+
+Flag: `easyctf{canary}`
