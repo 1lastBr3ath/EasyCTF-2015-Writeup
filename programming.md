@@ -213,6 +213,7 @@ The query I used was;
 document.body.innerText.match(/3\.14.*?1103/).toString().replace(/\s/g,'').replace('.','').indexOf('1103')+1;
 ```
 Flag: `easyctf{3494}`
+
 I, later, found a [site](http://www.angio.net/pi/digits.html) that does it without any effort.
 
 ------------
@@ -292,3 +293,105 @@ RPqdrMmQZLyDyEVWbDLqjJScOfQnrY
 Flag: `easyctf{changing_things_up_once_in_a_while_is_gooood_for_you}`
 
 -----------
+
+Oink - 85 points 
+-------
+Use the programming interface to solve this problem.
+
+Pig Latin is a "secret" language in which English words are changed to sound foreign. Its rules are pretty simple:
+
+    If the English word begins with a vowel, add "yay" to the end.
+    If the English word begins with a consonant, move the first letter to the end and then add "ay".
+
+For example, "Apples are Delicious" becomes "Applesyay areyay eliciousDay". Note: if you know a version of Pig Latin that uses a variation of rules different from the above rules, please use the above rules for this problem.
+
+Your job is to translate English input to Pig Latin output. For this exercise, keep capitalized letters capitalized, even when they are moved.
+
+ID: `piglatin1`
+Input: A sentence in English.
+Output: The translation in Pig Latin.
+
+Read the input from a file called `piglatin1.in` that's in the current working directory, and then write your output to a file called `piglatin1.out`
+
+**Hint**:
+Words are defined as separated by spaces. :)
+
+The solution is also straightforward,<br/>
+\- we add 'yay' to the end if the word begins with vowel, else 
+\- we move the first letter to the end, and add 'ay'<br/>
+Here's the solution I wrote;
+```python
+words = open('piglatin1.in', 'r').read().split()
+vowels = ['a','e','i','o','u','A','E','I','O','U']
+pl = []
+for c in words:
+  if c[0] in vowels: pl.append(c+'yay')
+  else: pl.append(c[1:]+c[0]+'ay')
+open('piglatin1.out', 'w').write(' '.join(pl)+'\n')
+```
+**Sample Input & Output**:
+```zsh
+$cat piglatin1.in
+I celebrate myself and sing myself
+$python piglatin1.py
+$cat piglati1.out
+Iyay elebratecay yselfmay andyay ingsay yselfmay
+```
+Flag: `easyctf{atinl4y_easyyay_3noughyay_orfay_ayay_1gpay!}`
+
+-----------
+
+Oink Oink - 115 points
+-------
+Use the programming interface to solve this problem.
+
+Now that we know how to convert from English to Pig Latin, can we reverse the translation? Given a sentence in Pig Latin, reverse it and try to find the original English text.
+
+Be careful to note that if a Pig Latin word is capitalized, like "Arispay", the original English word is "Paris" rather than "pAris". Case counts!
+
+ID: `piglatin2`
+Input: A sentence in Pig Latin.
+Output: The translation in English.
+
+Read the input from a file called `piglatin2.in` that's in the current working directory, and then write your output to a file called `piglatin2.out`
+
+**Hint**:
+Work backwards! You'll probably need the `chr()` and `ord()` functions! Also, string splicing is pretty cool in Python ;)
+
+It was almost similar to previous one, except in case of capitalization. There, it confused me for a moment.
+Here's the solution I wrote;<br/>
+```python
+words = open('piglatin2.in', 'r').readline().split()
+en = []
+for word in words:
+  if word[-3:] == 'yay': en.append(word[:-3])
+  else:
+    if ord(word[0]) in range(65,90):
+      en.append(chr(ord(word[-3:-2])-32) + word[:-3].lower())
+    else:
+      en.append(word[-3:-2] + word[:-3])
+open('piglatin2.out', 'w').write(' '.join(en)+'\n')
+```
+**Sample Input & Output**:
+```zsh
+$cat piglatin2.in
+Iyay elebratecay yselfmay andyay ingsay yselfmay
+$python piglatin2.py
+$cat piglatin.out
+I celebrate myself and sing myself
+```
+Flag: `easyctf{th0se_pesky_capit4ls_were_a_pa1n,_weren't_they?}`
+
+------------
+
+Obfuscated - 400 points 
+-------
+How good are you at reading Python? Put your Python skills to the test by finding the password that passes this check: [obfuscated.py](https://www.easyctf.com/static/problems/obfuscated/obfuscated.py)
+
+Note: `easyctf{}` formatting is not required for this problem.
+
+**Hint**:
+Note: there may be multiple correct answers. The grader runs the same code that's in the given file.
+
+This, to my knowledge, was/is not working properly. I went through the program thoroughly, and since I didn't get the complete flag, I, in order to view what it has to say given the wrong input, entered the string `canary`. In, other problems, it was giving a hint, kind of, but it accepted it as a flag instead. Tough it says, 'There may be multple correct answers', but according to the program given, a correct answer must of be 25 characters.
+Anyway, here's my analysis of the program;<br/>
