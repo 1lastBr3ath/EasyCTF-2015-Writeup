@@ -14,11 +14,13 @@ I had also found 3 easter eggs, which are already documented by [@failedxyz](htt
 **TEAM Info**:<br/>
 **Name**: [Rigo](//easyctf.com/team?Rigo)<br/>
 Team members:<br/>
->>>  [Jasmin](//twitter.com/jasmin_tweetz)<br/>
->>>  [Manish](//twitter.com/CoolDangol)<br/>
->>>  [Prakash](//twitter.com/1lastBr3ath)<br/>
->>>  [Sachin](//twitter.com/sachinnthakuri)<br/>
->>>  [Suraj](//twitter.com/dcsuraj3)
+>
+  [Jasmin](//twitter.com/jasmin_tweetz)<br/>
+  [Manish](//twitter.com/CoolDangol)<br/>
+  [Prakash](//twitter.com/1lastBr3ath)<br/>
+  [Sachin](//twitter.com/sachinnthakuri)<br/>
+  [Suraj](//twitter.com/dcsuraj3)
+>
     
 ---------
 
