@@ -4,7 +4,6 @@ This repo contains write-ups on [EasyCTF 2015](//easyctf.com) [Problems](//easyc
 ##[Web](web.md)
 ##[Binary Exploitation](binary_exploitation.md)
 ##[Linux](linux.md)
-##[Cryptography](crypto.md)
 ##[Forensics](forensics.md)
 
 I had also found 3 easter eggs, which are already documented by [@failedxyz](https://twitter.com/failedxyz).
